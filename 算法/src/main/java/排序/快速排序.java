@@ -9,8 +9,9 @@ public class 快速排序 {
         int[] data = {6, 2, 7, 3, 8, 9};
         int[] data1 = {1, 2, 3, 4, 5, 6};
         int[] data2 = {6, 5, 4, 3, 2, 1};
-//        Arrays.stream(quickSort1(data2, 0, data2.length - 1)).forEach(x -> System.out.print(x + " "));
-        System.out.println(findMinNValue(data, 2));
+        int[] data3 = {5, 2, 6, 7, 5, 4};
+        Arrays.stream(quickSort3(data3, 0, data2.length - 1)).forEach(x -> System.out.print(x + " "));
+//        System.out.println(findMinNValue(data, 2));
     }
     
     /**
@@ -21,7 +22,7 @@ public class 快速排序 {
      * @param end   待排元素结束下标
      */
     
-    public static int[] quickSort(int[] data, int start, int end) {
+    static int[] quickSort(int[] data, int start, int end) {
         if (end <= start) {
             return data;
         }
@@ -53,7 +54,7 @@ public class 快速排序 {
     /**
      * 原地排序，需要额外空间
      */
-    public static int[] quickSort1(int[] data, int start, int end) {
+    private static int[] quickSort1(int[] data, int start, int end) {
         if (end <= start) {
             return data;
         }
@@ -66,7 +67,7 @@ public class 快速排序 {
     /**
      * 分区返回枢纽元的下标
      */
-    public static int partition(int[] data, int start, int end) {
+    private static int partition(int[] data, int start, int end) {
         int key = data[end];
 //        [start,i)是小于枢纽元的区间,(i,end]是大于等于枢纽元的区间
         int i = start;
@@ -82,6 +83,83 @@ public class 快速排序 {
         data[i] = data[end];
         data[end] = tmp;
         return i;
+    }
+    
+    /**
+     * 两路快排
+     * 由于一趟快排会把小于枢纽元的放在左边，大于枢纽元的放在右边，等于枢纽元的要么放在左边要么放在右边
+     * 当等于枢纽元的元素过多时会导致某一边的数据量大于另一边，眼中的可能会退化成O(n²)所以产生了二路快排
+     * 二路快排通过遇到相等的就不处理，最终结果是等于枢纽元的数据分散在枢纽元两边
+     */
+    private static int[] quickSort2(int[] data, int start, int end) {
+        if (end <= start) {
+            return data;
+        }
+        int key = partition2(data, start, end);
+        quickSort2(data, start, key - 1);
+        quickSort2(data, key + 1, end);
+        return data;
+    }
+    
+    private static int partition2(int[] data, int start, int end) {
+//        base必须是下标为i的元素
+        int i = start;
+        int j = end;
+        int base = data[i];
+
+//        必须是先从右往左扫描，base取的是下标为i的元素，第一次从右往左扫描会将第一个小于base的元素覆盖base
+//        相当于将base从数组中删除，这样直接进行赋值操作就不会删除其他元素
+//        [start,i)是小于等于base (j,end]是大于等于base的
+        while (i < j) {
+            
+            //从右到左扫描，扫描出第一个比base小的元素，然后j停在那里。
+            while (j > i && data[j] >= base) {
+                j--;
+            }
+            data[i] = data[j];
+            
+            //从左到右扫描，扫描出第一个比base大的元素，然后i停在那里。
+            while (i < j && data[i] <= base) {
+                i++;
+            }
+            data[j] = data[i];
+        }
+        data[j] = base;
+        return j;
+    }
+    
+    private static int[] quickSort3(int[] data, int start, int end) {
+        if (end <= start) {
+            return data;
+        }
+        int[] keys = partition3(data, start, end);
+        quickSort3(data, start, keys[0] - 1);
+        quickSort3(data, keys[1] + 1, end);
+        return data;
+    }
+    
+    private static int[] partition3(int[] data, int start, int end) {
+        int i = start;
+        int j = end;
+        int k = i;
+        int base = data[i];
+//        [start,i
+        while (k <= j) {
+            if (data[k] < base) {
+                swap(data, k++, i++);
+            } else if (data[k] > base) {
+                swap(data, k, j--);
+            }else {
+                k++;
+            }
+        }
+        return new int[]{i, j};
+    }
+    
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
     }
     
     /**
@@ -101,7 +179,7 @@ public class 快速排序 {
                 return data[partition];
             } else if (partition + 1 > n) {
                 end = partition - 1;
-            }else {
+            } else {
                 start = partition + 1;
             }
         }

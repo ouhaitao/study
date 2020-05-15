@@ -16,6 +16,7 @@
         <module>JPA</module>
         <module>proxy</module>
         <module>redis</module>
+        <module>算法</module>
     </modules>
 
     <properties>
@@ -35,6 +36,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
             <optional>true</optional>
         </dependency>
         <dependency>
