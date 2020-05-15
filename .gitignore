@@ -1,0 +1,8 @@
+*.iml
+.project
+/.idea/
+/out/
+/target/
+/*/out/
+/*/target/
+/*/*.iml
