@@ -9,13 +9,14 @@ public class 快速排序 {
         int[] data = {6, 2, 7, 3, 8, 9};
         int[] data1 = {1, 2, 3, 4, 5, 6};
         int[] data2 = {6, 5, 4, 3, 2, 1};
-        int[] data3 = {5, 2, 6, 7, 5, 4};
-        Arrays.stream(quickSort3(data3, 0, data2.length - 1)).forEach(x -> System.out.print(x + " "));
+        int[] data3 = {5, 2, 6, 4, 3, 5};
+        Arrays.stream(quickSort3(data3, 0, data3.length - 1)).forEach(x -> System.out.print(x + " "));
 //        System.out.println(findMinNValue(data, 2));
     }
     
     /**
-     * 时间复杂度为O(nlog n)，需要额外空间
+     * 时间复杂度为O(nlog n)，O(log n)
+     * 非原地排序方法，需要额外空间
      *
      * @param data  待排数组
      * @param start 待排元素起始下标
@@ -52,9 +53,9 @@ public class 快速排序 {
     }
     
     /**
-     * 原地排序，需要额外空间
+     * 原地排序，不需要额外空间
      */
-    private static int[] quickSort1(int[] data, int start, int end) {
+    static int[] quickSort1(int[] data, int start, int end) {
         if (end <= start) {
             return data;
         }
@@ -102,7 +103,7 @@ public class 快速排序 {
     }
     
     private static int partition2(int[] data, int start, int end) {
-//        base必须是下标为i的元素
+//        base必须是下标为i的元素，i为start
         int i = start;
         int j = end;
         int base = data[i];
@@ -128,6 +129,11 @@ public class 快速排序 {
         return j;
     }
     
+    /**
+     * 三路快排
+     * 对二路快排的优化，当数组中等于枢纽元的元素分布极端，例如全部分布在数据末尾
+     * 使用二路快排会使大于枢纽元的一边元素数量远大于小于枢纽元的一边，造成性能损失
+     */
     private static int[] quickSort3(int[] data, int start, int end) {
         if (end <= start) {
             return data;
@@ -143,13 +149,15 @@ public class 快速排序 {
         int j = end;
         int k = i;
         int base = data[i];
-//        [start,i
+//        [start,i)是小于base的元素 (j,end]是大于base的元素 [i,j]是等于base的元素
         while (k <= j) {
             if (data[k] < base) {
+//                由于k从i开始，所以k>=i，小于k的都是已经处理过的，所以这里交换后k自增
                 swap(data, k++, i++);
             } else if (data[k] > base) {
+//                由于将数组后面的元素换到了下标为k的位置来，没有进行过判断需要对其进行判断，所以k不自增，
                 swap(data, k, j--);
-            }else {
+            } else {
                 k++;
             }
         }
