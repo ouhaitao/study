@@ -16,7 +16,6 @@
         <module>JPA</module>
         <module>proxy</module>
         <module>redis</module>
-        <module>算法</module>
     </modules>
 
     <properties>

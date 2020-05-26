@@ -1,7 +1,7 @@
 package ouht.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import org.ouht.service.GenericServiceDemo;
+import service.GenericServiceDemo;
 
 
 @Service
