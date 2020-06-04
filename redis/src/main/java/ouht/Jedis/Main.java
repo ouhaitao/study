@@ -36,9 +36,9 @@ public class Main {
 //        responses.forEach(System.out::println);
 
 //        管道
-        Pipeline pipelined = jedis.pipelined();
-        pipelined.set("key1", "value1");
-        pipelined.set("key2", "value2");
-        pipelined.sync();
+//        Pipeline pipelined = jedis.pipelined();
+//        pipelined.set("key1", "value1");
+//        pipelined.set("key2", "value2");
+//        pipelined.sync();
     }
 }
