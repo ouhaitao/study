@@ -1,6 +1,10 @@
 package clazz;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class OptionalTest {
 
@@ -24,6 +28,9 @@ public class OptionalTest {
 		System.out.println(o.orElse("2"));
 		//判断自己的值是否为null,是则执行给出的supplier参数的get方法,否则返回自己的值
 		System.out.println(o.orElseGet(()->"2"));
+		
+		Optional<List<Integer>> optional = Optional.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+		optional.ifPresent(list -> System.out.println(list.stream().filter(x->x>5).collect(Collectors.toList())));
 	}
 
 }
