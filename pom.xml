@@ -17,6 +17,8 @@
         <module>proxy</module>
         <module>redis</module>
         <module>zookeeper</module>
+        <module>Dbcp</module>
+        <module>spring-test</module>
     </modules>
 
     <properties>
