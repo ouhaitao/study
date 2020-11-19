@@ -1,6 +1,11 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+/**
+ * 如果是求问题的最优解，且该问题可以分解成若干个子问题，并且子问题之间还有重叠的更小子问题，就可以考虑用动态规划
+ * 在应用动态规划之前要分析能否把大问题分解成小问题，分解后的每个小问题也存在最优解，如果小问题的最优解能组合起来得到
+ * 整个问题的最优解，那么就可以用动态规划解决这个问题
+ */
 public class 动态规划 {
 
     public static void main(String[] args) {
