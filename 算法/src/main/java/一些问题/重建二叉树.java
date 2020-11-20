@@ -22,6 +22,15 @@ public class 重建二叉树 {
         int[] mid = {4, 7, 2, 1, 5, 3, 8, 6};
         Node node = fun(per, mid);
         System.out.println(node);
+        node = fun(per, mid, 0, per.length - 1, 0, mid.length - 1);
+        System.out.println(node);
+    
+        per = new int[]{1, 2, 3, 4, 5, 6, 7};
+        mid = new int[]{3, 2, 4, 1, 6, 5, 7};
+        node = fun(per, mid);
+        System.out.println(node);
+        node = fun(per, mid, 0, per.length - 1, 0, mid.length - 1);
+        System.out.println(node);
     }
     
     private static Node fun(int[] per, int[] mid) {
@@ -36,6 +45,29 @@ public class 重建二叉树 {
         }
         if (rootIndex < mid.length - 1) {
             rootNode.right = fun(copy(per, 1 + rootIndex, per.length - 1), copy(mid, rootIndex + 1, mid.length - 1));
+        }
+        return rootNode;
+    }
+    
+    /**
+     * mid数组中 左子树的节点的下标为[midIndexStart, rootIndex - 1] 右子树的节点下标为[rooIndex + 1, midIndexEnd]
+     * 得左子树节点个数为leftCount = (rootIndex - 1) - midIndexStart + 1 右子树节点个数为rightCount = midIndexEnd - (rootIndex + 1) + 1
+     * per数组中 左子树的节点下标为[perIndexStart + 1, perIndexStart + leftCount] 右子树的节点下标为[perIndexEnd - rightCount + 1, perIndexEnd]
+     */
+    private static Node fun(int[] per, int[] mid, int perIndexStart, int perIndexEnd, int midIndexStart, int midIndexEnd) {
+        int root = per[perIndexStart];
+        
+        int rootIndex = findNodeIndex(mid, root, midIndexStart, midIndexEnd);
+        Node rootNode = new Node();
+        rootNode.value = root;
+        if (rootIndex > midIndexStart) {
+            int leftCount = (rootIndex - 1) - midIndexStart + 1;
+            rootNode.left = fun(per, mid, perIndexStart + 1, perIndexStart + leftCount, midIndexStart, rootIndex - 1);
+        }
+        
+        if (rootIndex < midIndexEnd) {
+            int rightCount = midIndexEnd - (rootIndex + 1) + 1;
+            rootNode.right = fun(per, mid, perIndexEnd - rightCount + 1, perIndexEnd, rootIndex + 1, midIndexEnd);
         }
         return rootNode;
     }
@@ -57,6 +89,15 @@ public class 重建二叉树 {
     
     private static int findNodeIndex(int[] arr, int root) {
         for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == root) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    private static int findNodeIndex(int[] arr, int root, int start, int end) {
+        for (int i = start; i <= end; i++) {
             if (arr[i] == root) {
                 return i;
             }
