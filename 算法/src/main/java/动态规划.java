@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class 动态规划 {
 
     public static void main(String[] args) {
-        backpack();
+        cutRope(8);
     }
 
     //背包问题
@@ -196,5 +196,41 @@ public class 动态规划 {
             }
             System.out.println();
         }
+    }
+    
+    /**
+     * 切绳子
+     * 把长度为length的绳子切成若干段（至少切一刀），使这些段的乘积最大
+     *
+     * 递推公式 f(n) = MAX[i * (n - i), i * f(n - i)] (i > 3)
+     * 在长度为i处切一刀，然后接下来选择不切，即结果为i * (n - i)；选择继续切，即结果为i * f(n - i)
+     */
+    public static void cutRope(int length) {
+        if (length < 2) {
+            System.out.println(0);
+        }
+        if (length == 2) {
+            System.out.println(1);
+        }
+        if (length == 3) {
+            System.out.println(2);
+        }
+        int[] dp = new int[length + 1];
+        dp[0] = 0;
+        dp[1] = 0;
+        dp[2] = 1;
+        dp[3] = 2;
+        for (int i = 4; i <= length; i++) {
+            int max = -1;
+//            j >= i/2与 j <= i/2 结果重复
+            for (int j = 1; j <= i / 2; j++) {
+                int tmp = Math.max(j * (i - j), j * dp[i - j]);
+                if (tmp > max) {
+                    max = tmp;
+                }
+            }
+            dp[i] = max;
+        }
+        System.out.println(dp[length]);
     }
 }
