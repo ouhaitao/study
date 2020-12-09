@@ -1,5 +1,7 @@
 package 树.二叉树;
 
+import 树.TreeNode;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -13,20 +15,20 @@ public class 遍历 {
      * 按层遍历
      */
     private static void fun1() {
-        Node node1 = build();
-        Queue<Node> nodes = new LinkedList<>();
-        nodes.add(node1);
+        TreeNode treeNode1 = build();
+        Queue<TreeNode> treeNodes = new LinkedList<>();
+        treeNodes.add(treeNode1);
         int floor = 1;
-        while (nodes.peek() != null) {
+        while (treeNodes.peek() != null) {
             System.out.println("第" + floor++ + "层:");
-            int size = nodes.size();
+            int size = treeNodes.size();
             for (int i = 0; i < size; i++) {
-                Node poll = nodes.poll();
+                TreeNode poll = treeNodes.poll();
                 if (poll.getLeft() != null) {
-                    nodes.add(poll.getLeft());
+                    treeNodes.add(poll.getLeft());
                 }
                 if (poll.getRight() != null) {
-                    nodes.add(poll.getRight());
+                    treeNodes.add(poll.getRight());
                 }
                 System.out.println(poll.getVal());
             }
@@ -34,14 +36,14 @@ public class 遍历 {
         System.out.println();
     }
     
-    private static Node build() {
-        Node node7 = new Node(7, null, null);
-        Node node6 = new Node(6, null, null);
-        Node node5 = new Node(5, null, null);
-        Node node4 = new Node(4, null, null);
-        Node node3 = new Node(3, node6, node7);
-        Node node2 = new Node(2, node4, node5);
-        Node node1 = new Node(1, node2, node3);
-        return node1;
+    private static TreeNode build() {
+        TreeNode treeNode7 = new TreeNode(7, null, null);
+        TreeNode treeNode6 = new TreeNode(6, null, null);
+        TreeNode treeNode5 = new TreeNode(5, null, null);
+        TreeNode treeNode4 = new TreeNode(4, null, null);
+        TreeNode treeNode3 = new TreeNode(3, treeNode6, treeNode7);
+        TreeNode treeNode2 = new TreeNode(2, treeNode4, treeNode5);
+        TreeNode treeNode1 = new TreeNode(1, treeNode2, treeNode3);
+        return treeNode1;
     }
 }

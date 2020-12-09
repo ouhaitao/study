@@ -1,4 +1,4 @@
-package 树.二叉树;
+package 树;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,13 +9,13 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Node {
+public class TreeNode {
     
     private int val;
-    private Node left;
-    private Node right;
+    private TreeNode left;
+    private TreeNode right;
     
-    public Node(int val, Node left, Node right) {
+    public TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;

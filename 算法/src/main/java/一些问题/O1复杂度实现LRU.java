@@ -251,20 +251,20 @@ public class O1复杂度实现LRU {
 //    错误示范
 //    private static class LRUCache {
 //
-//        private static class Node {
+//        private static class TreeNode {
 //            private int key;
 //            private int value;
-//            private Node next;
-//            private Node pre;
+//            private TreeNode next;
+//            private TreeNode pre;
 //        }
 //
 //        private final int capacity;
 //
 //        private int size;
 //
-//        private Node head;
+//        private TreeNode head;
 //
-//        private Node tail;
+//        private TreeNode tail;
 //
 //        public LRUCache(int capacity) {
 //            this.capacity = capacity;
@@ -276,7 +276,7 @@ public class O1复杂度实现LRU {
 //            if (head == null) {
 //                return -1;
 //            }
-//            Node contain = contain(key);
+//            TreeNode contain = contain(key);
 //            if (contain != null) {
 //                int value = contain.value;
 //                if (head != contain) {
@@ -288,7 +288,7 @@ public class O1复杂度实现LRU {
 //        }
 //
 //        public void put(int key, int value) {
-//            Node contain = contain(key);
+//            TreeNode contain = contain(key);
 //            if (contain != null) {
 //                contain.value = value;
 //                if (head != contain) {
@@ -302,7 +302,7 @@ public class O1复杂度实现LRU {
 //            } else {
 //                full = true;
 //            }
-//            Node node = new Node();
+//            TreeNode node = new TreeNode();
 //            node.key = key;
 //            node.value = value;
 //            if (head == null) {
@@ -324,8 +324,8 @@ public class O1复杂度实现LRU {
 //            }
 //        }
 //
-//        private Node contain(int key) {
-//            Node current = head;
+//        private TreeNode contain(int key) {
+//            TreeNode current = head;
 //            while (current != null) {
 //                if (current.key == key) {
 //                    return current;
@@ -335,7 +335,7 @@ public class O1复杂度实现LRU {
 //            return null;
 //        }
 //
-//        private void moveToHead(Node node) {
+//        private void moveToHead(TreeNode node) {
 //            if (size == 1) {
 //
 //            } else if (size == 2) {
@@ -350,7 +350,7 @@ public class O1复杂度实现LRU {
 //                    return;
 //                }
 //                if (tail == node) {
-//                    Node tmp = tail;
+//                    TreeNode tmp = tail;
 //                    tail = tail.pre;
 //                    tail.next = null;
 //                    tmp.next = head;
