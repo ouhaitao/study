@@ -1,4 +1,4 @@
-package 一些问题;
+package 栈;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package 一些问题;
+package 栈;
 
 import java.util.Stack;
 
@@ -32,7 +32,7 @@ public class 包含min函数的栈 {
     
     private static void push(int num) {
         data.push(num);
-        if (num <= minData.peek()) {
+        if (data.empty() || num <= minData.peek()) {
             minData.push(num);
         } else {
             minData.push(min());
@@ -43,4 +43,5 @@ public class 包含min函数的栈 {
         minData.pop();
         return data.pop();
     }
+
 }
