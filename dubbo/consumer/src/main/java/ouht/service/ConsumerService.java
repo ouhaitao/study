@@ -13,7 +13,7 @@ public class ConsumerService {
     @Autowired
     private GenericFactory genericFactory;
     
-    @Reference
+    @Reference(timeout = Integer.MAX_VALUE)
     private Service service;
 
     @GetMapping("sayBye")
