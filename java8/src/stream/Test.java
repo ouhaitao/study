@@ -1,6 +1,8 @@
 package stream;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -16,7 +18,17 @@ public class Test {
         // 构造l的一个流,调用map方法,表示对流里面的所有元素*1.5,然后将里面的所有元素想加
         //reduce方法的参数是一个BinaryOperator,一个函数式接口,用lambada创建该接口然后调用该操作,在源码里面有相似实现
 //		System.out.println(l.stream().map(x -> x * 1.5).reduce((y, x) -> y + x).get());
-
+        ArrayList<Double> reduce = l.stream().map(x -> {
+            ArrayList<Double> list = new ArrayList<>();
+            list.add(x);
+            return list;
+        }).reduce(new ArrayList<>(), (list1, list2) -> {
+            list1.addAll(list2);
+            return list1;
+        });
+        Collections.sort(reduce);
+        System.out.println(reduce);
+    
         // 构造l的一个流,电泳filter方法,将所有大于2的元素过滤出来,然后组成一个list,然后遍历
         //filter方法的参数是一个predicate函数式接口,用lambda表达式创建一个predicate对象
 //		l.stream().filter(x -> x > 2).collect(Collectors.toList()).forEach(x -> System.out.println(x));

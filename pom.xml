@@ -20,6 +20,7 @@
         <module>Dbcp</module>
         <module>spring-test</module>
         <module>算法</module>
+        <module>rocketMq</module>
     </modules>
 
     <properties>
