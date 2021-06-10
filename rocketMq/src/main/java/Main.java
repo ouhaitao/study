@@ -30,7 +30,7 @@ public class Main {
         producer.setSendMsgTimeout(Integer.MAX_VALUE);
         //Launch the instance.
         producer.start();
-        Message msg = new Message("TopicTest1", "TagA", "Hello RocketMQ".getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message msg = new Message("TopicTest12", "TagA", "Hello RocketMQ".getBytes(RemotingHelper.DEFAULT_CHARSET));
         for (int i = 0; i < 10; i++) {
             SendResult sendResult = producer.send(msg);
             System.out.printf("%s%n", sendResult);
@@ -48,14 +48,9 @@ public class Main {
         // Subscribe one more more topics to consume.
         consumer.subscribe("TopicTest1", "*");
         // Register callback to execute on arrival of messages fetched from brokers.
-        consumer.registerMessageListener(new MessageListenerConcurrently() {
-            
-            @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
-                                                            ConsumeConcurrentlyContext context) {
-                System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-            }
+        consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
+            System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
         
         //Launch the consumer instance.

@@ -27,14 +27,34 @@ public class TimeServer {
     
     private static String separator = System.getProperty("line.separator");
     
+    /**
+     * reactor三种线程的使用样例
+     */
+    public void example() {
+        ServerBootstrap bootstrap = new ServerBootstrap();
+        // 单线程模型 (单Reactor单线程)
+        // 连接请求、IO处理请求全部由这一个线程承担
+        EventLoopGroup single = new NioEventLoopGroup(1, new DefaultThreadFactory("single"));
+        bootstrap.group(single, single);
+        // 多线程模型 (单Reactor多线程)
+        // 连接请求由线程池中一个线程承担，然后IO处理由其他线程承担
+        EventLoopGroup multi = new NioEventLoopGroup(10, new DefaultThreadFactory("single"));
+        bootstrap.group(multi, multi);
+        // 主从reactor模型 (多Reactor多线程) 一主多从 如果只监听一个端口的话 主Reactor只需要一个线程即可
+        // mainReactor用于接收连接 然后将IO事件分发给subReactor
+        EventLoopGroup mainReactor = new NioEventLoopGroup(1, new DefaultThreadFactory("parent"));
+        EventLoopGroup subReactor = new NioEventLoopGroup(10, new DefaultThreadFactory("child"));
+        bootstrap.group(mainReactor, subReactor);
+        
+    }
+    
     public void bind(int port) throws Exception {
 //        线程组 一个用于接受客户端连接 一个用于IO操作
-//        parentGroup用于serverBootstrap的父类AbstractBootstrap使用的线程池
-//        AbstractBootstrap是个工厂类，用于接受客户端连接
 //        如果只监听一个端口则只需要一个线程即可，因为一个NioServerSocketChannel只能够与一个NioEventLoop绑定，该channel的所有操作均由绑定的NioEventLoop进行
+//        Channel的注册、绑定操作都由该线程承担
         EventLoopGroup parentGroup = new NioEventLoopGroup(1, new DefaultThreadFactory("parent"));
-//        childGroup是ServerBootstrap使用的线程池
-        EventLoopGroup childGroup = new NioEventLoopGroup(0, new DefaultThreadFactory("child"));
+//        childGroup是IO操作用的线程池，注册到boss线程的Channel监听到连接事件后会将后续处理分发到该线程池
+        EventLoopGroup childGroup = new NioEventLoopGroup(10, new DefaultThreadFactory("child"));
 //        netty启动辅助类
         ServerBootstrap bootstrap = new ServerBootstrap();
         try {

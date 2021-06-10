@@ -19,7 +19,7 @@
         <module>zookeeper</module>
         <module>Dbcp</module>
         <module>spring-test</module>
-        <module>算法</module>
+        <module>algorithm</module>
         <module>rocketMq</module>
     </modules>
 
