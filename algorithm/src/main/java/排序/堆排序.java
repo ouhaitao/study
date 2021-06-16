@@ -49,7 +49,7 @@ public class 堆排序 {
     public static void main(String[] args) {
         Integer[] a = { 26, 53, 41, 58, 59, 31, 97 };
 //        length/2 ~ length都是叶子结点 不是堆 叶子结点与其父节点构成了最下层的最小堆
-        for (Integer i = a.length / 2; i >= 0; i--) {
+        for (Integer i = a.length / 2 - 1; i >= 0; i--) {
             siftDown(a, i, a.length);
         }
         forEach(a);
@@ -69,8 +69,8 @@ public class 堆排序 {
     }
     
     private static void forEach(Integer[] a) {
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + " ");
+        for (Integer integer : a) {
+            System.out.print(integer + " ");
         }
         System.out.println();
     }
