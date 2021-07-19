@@ -55,7 +55,7 @@ public class 快速排序 {
     /**
      * 原地排序，不需要额外空间
      */
-    static int[] quickSort1(int[] data, int start, int end) {
+    public static int[] quickSort1(int[] data, int start, int end) {
         if (end <= start) {
             return data;
         }

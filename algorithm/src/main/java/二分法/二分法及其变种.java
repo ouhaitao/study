@@ -1,3 +1,5 @@
+package 二分法;
+
 /**
  * @author parry
  * @date 2020/04/25
@@ -5,7 +7,7 @@
 public class 二分法及其变种 {
     
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 5, 5, 5, 7, 8, 9, 0};
+        int[] a = {1, 2, 3, 5, 5, 5, 7, 8, 9};
         System.out.println(search(a, 7));
         System.out.println(searchFirstValue(a, 5));
         System.out.println(searchLastValue(a, 5));
@@ -13,6 +15,8 @@ public class 二分法及其变种 {
         System.out.println(searchFirstBiggerOrEqualValue(a, 6));
         System.out.println(searchLastLessOrEqualValue(a, 5));
         System.out.println(searchLastLessOrEqualValue(a, 6));
+        int[] b = new int[] {2,2};
+        System.out.println(search(b, 3));
     }
     
     
