@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * @author parry
  * @date 2020/12/15
+ * https://leetcode-cn.com/problems/longest-common-subsequence/
  */
 public class 最长公共子序列 {
     

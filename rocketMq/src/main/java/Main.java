@@ -9,7 +9,9 @@ import org.apache.rocketmq.common.TopicConfig;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,7 +32,7 @@ public class Main {
         producer.setSendMsgTimeout(Integer.MAX_VALUE);
         //Launch the instance.
         producer.start();
-        Message msg = new Message("TopicTest12", "TagA", "Hello RocketMQ".getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message msg = new Message("TopicTest1", "TagA", "Hello RocketMQ".getBytes(RemotingHelper.DEFAULT_CHARSET));
         for (int i = 0; i < 10; i++) {
             SendResult sendResult = producer.send(msg);
             System.out.printf("%s%n", sendResult);
