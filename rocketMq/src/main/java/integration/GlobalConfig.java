@@ -6,6 +6,9 @@ package integration;
  */
 public class GlobalConfig {
     
+    /**
+     * nameServer地址
+     */
     private String nameSrvAddr;
     
     /**
@@ -13,6 +16,9 @@ public class GlobalConfig {
      */
     private String producerGroup;
     
+    /**
+     * 消息超时
+     */
     private Integer timeout;
     
     /**
@@ -20,8 +26,14 @@ public class GlobalConfig {
      */
     private String consumerGroup;
     
+    /**
+     * topic
+     */
     private String topic;
     
+    /**
+     * tag
+     */
     private String tag;
     
     public GlobalConfig(String nameSrvAddr, String projectName, Integer timeout, String topic, String tag) {
