@@ -11,6 +11,10 @@ public class Test {
     public static void main(String[] args) {
         IService service = ExtensionLoader.getExtensionLoader(IService.class).getDefaultExtension();
         service.sayHello();
+    
+        System.out.println();
+        
+        ExtensionLoader.getExtensionLoader(IService.class).getExtension("impl").sayHello();
     }
     
 }

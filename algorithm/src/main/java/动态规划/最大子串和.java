@@ -5,7 +5,7 @@ package 动态规划;
  * @date 2021/07/15
  * https://leetcode-cn.com/problems/maximum-subarray/solution/dong-tai-gui-hua-fen-zhi-fa-python-dai-ma-java-dai/
  */
-public class 最大子序列和 {
+public class 最大子串和 {
     
     public static void main(String[] args) {
         System.out.println(maxSubArray(new int[] {-2, 1, -3, 4, -1, 2, 1, -5, 4}));

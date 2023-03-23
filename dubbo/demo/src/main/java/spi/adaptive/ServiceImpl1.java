@@ -11,7 +11,6 @@ import com.alibaba.dubbo.common.extension.Activate;
 public class ServiceImpl1 implements IService {
     
     @Override
-    
     public void say(URL url) {
         System.out.println("impl1");
     }
