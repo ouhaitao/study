@@ -15,10 +15,14 @@ public class 最长公共子序列 {
         System.out.println(findMaxLengthStr(text1, text2));
     }
     
+    /**
+     * dp[i][j]表示text1前i个字符组成的字符串与text2前j个字符组成的字符串最长公共子序列的长度
+     * 如果text1[i] == text2[j]，那么dp[i][j] = dp[i - 1][j - 1] + 1
+     * 否则text1或text2向前推进1个字符串中最长的子序列长度为dp[i][j]
+     */
     private static int findMaxLengthStr(String text1, String text2) {
         char[] str1 = text1.toCharArray();
         char[] str2 = text2.toCharArray();
-//        这里dp数组从1开始可以不需要考虑边界问题
         int[][] dp = new int[str1.length + 1][str2.length + 1];
         
         for (int i = 1; i <= str1.length; i++) {
